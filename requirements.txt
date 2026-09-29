@@ -1,0 +1,6 @@
+streamlit>=1.38
+supabase>=2.7
+python-dotenv>=1.0
+anthropic>=0.109
+requests>=2.31
+pytest>=8.0

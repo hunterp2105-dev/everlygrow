@@ -1,0 +1,27 @@
+[theme]
+# §16 dropdown-contrast fix (2026-09-03): this was still the leftover v1
+# warm/editorial (light) config after the v2 dark-mode-first redesign
+# (§18.1) — app/styles/theme.css was rewritten for dark, but nothing ever
+# updated Streamlit's own native theme, which is what BaseWeb portal
+# components (the select/multiselect dropdown menu, date-picker popover,
+# etc.) actually render with. Those portals aren't reachable by our
+# scoped CSS selectors the way in-page elements are, so they kept
+# rendering with the old light background — while our global
+# `p, span, div, label, li { color: var(--color-ink) }` rule in
+# theme.css DID reach their text (light text color on a light
+# background = unreadable). Setting base="dark" with these exact
+# tokens is the real fix — everything BaseWeb renders now starts from
+# a dark palette instead of leaning on CSS overrides that can't reach it.
+base = "dark"
+primaryColor = "#3E8EFF"
+backgroundColor = "#0E1013"
+secondaryBackgroundColor = "#15181C"
+textColor = "#E6E8EB"
+borderColor = "#262A30"
+font = "sans serif"
+
+[client]
+showErrorDetails = true
+
+[browser]
+gatherUsageStats = false
