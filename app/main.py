@@ -1,3 +1,18 @@
+import os
+import sys
+
+# Deployment fix (Streamlit Community Cloud): running `python -m streamlit
+# run app/main.py` locally puts the current working directory (the repo
+# root) on sys.path, which is why `from app.lib import ...` below has always
+# worked in local dev. Streamlit Cloud's runner does not do this the same
+# way — it left the repo root off sys.path, so the very same import failed
+# there with `ModuleNotFoundError: No module named 'app'` (reproduced
+# locally too: this import fails if the working context is app/ itself,
+# rather than its parent). Explicitly adding the repo root here makes the
+# import resolve the same way regardless of how the script was invoked —
+# a packaging fix, not a functional change.
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import streamlit as st
 import streamlit.components.v1 as components
 
